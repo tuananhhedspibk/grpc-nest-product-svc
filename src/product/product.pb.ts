@@ -1,6 +1,6 @@
 import { GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
 import Long from 'long';
-import { util, configure } from 'protobufjs';
+import { util, configure } from 'protobufjs/minimal';
 import { Observable } from 'rxjs';
 
 export const protobufPackage = 'product';
@@ -111,8 +111,6 @@ export const ProductServiceControllerMethods = () => {
 
 export const PRODUCT_SERVICE_NAME = 'ProductService';
 
-// If you get a compile-error about 'Constructor<Long> and ... have no overlap',
-// add '--ts_proto_opt=esModuleInterop=true' as a flag when calling 'protoc'.
 if (util.Long !== Long) {
   util.Long = Long as any;
   configure();
