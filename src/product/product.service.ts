@@ -71,7 +71,7 @@ export class ProductService {
     }
 
     const isAlreadyDecreased = await this.decreaseLogRepository.count({
-      where: { orderId },
+      where: { order_id: orderId },
     });
 
     if (isAlreadyDecreased) {
@@ -82,7 +82,7 @@ export class ProductService {
     }
 
     await this.repository.update(product.id, { stock: product.stock - 1 });
-    await this.decreaseLogRepository.insert({ product, orderId });
+    await this.decreaseLogRepository.insert({ product, order_id: orderId });
 
     return { error: null, status: HttpStatus.OK };
   }
